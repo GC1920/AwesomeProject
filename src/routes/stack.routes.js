@@ -7,14 +7,26 @@ import { ScreenB } from "../Screens/ScreenB";
 import { ScreenC } from "../Screens/ScreenC";
 
 export function HomeStackRoute() {
+
+    const config = {
+        animation: 'spring',
+        config: {
+          stiffness: 1000,
+          damping: 500,
+          mass: 3,
+          overshootClamping: true,
+          restDisplacementThreshold: 0.01,
+          restSpeedThreshold: 0.01,
+        },
+      };
+    
     return(
         <Navigator>
-            <Screen 
+            <Screen
                 name='ScreenA'
                 component={ScreenA}
                 options={{
-                    title: 'Arroz',
-                    headerTitleAlign: 'center'
+                    headerShown: false
                 }}
             />
 
@@ -23,7 +35,11 @@ export function HomeStackRoute() {
                 component={ScreenC}
                 options={{
                     title: 'Cardume',
-                    headerTitleAlign: 'center'
+                    headerTitleAlign: 'center',
+                    transitionSpec: {
+                        open: config,
+                        close: config,
+                    },
                 }}
             />
         </Navigator>
@@ -37,8 +53,7 @@ export function MyListStackRoute() {
                 name='ScreenB'
                 component={ScreenB}
                 options={{
-                    title: 'Batata',
-                    headerTitleAlign: 'center'
+                    headerShown: false
                 }}
             />
         </Navigator>
