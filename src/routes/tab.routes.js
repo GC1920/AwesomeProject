@@ -2,20 +2,19 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const { Screen, Navigator } = createBottomTabNavigator();
 
-import { ScreenA } from '../Screens/ScreenA';
-import { ScreenB } from '../Screens/ScreenB';
+import { HomeStackRoute, MyListStackRoute } from './stack.routes';
 
 export function TabRoutes() {
     return(
         <Navigator>
             <Screen 
-                name='ScreenA'
-                component={ScreenA}
+                name='Home'
+                component={HomeStackRoute}
             />
 
             <Screen 
-                name='ScreenB'
-                component={ScreenB}
+                name='My List'
+                component={MyListStackRoute}
             />
         </Navigator>
     )
