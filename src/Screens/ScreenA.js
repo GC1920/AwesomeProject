@@ -1,38 +1,100 @@
 import React from 'react';
-import { View, Text, Button, ScrollView } from 'react-native';
+import { View, Text, Image, FlatList, ScrollView, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { Header } from './utils/home.header';
+import { Popular } from '../database/api.popular';
 
-export function ScreenA() {
+import { API_IMG } from '@env';
 
-    const navigation = useNavigation()
+const Item = ({ poster }) => {
+
+  const navigation = useNavigation()
 
     function openScreen() {
 
         navigation.navigate('ScreenC');
 
-    }
+    };
 
+  return(
+    <TouchableOpacity onPress={openScreen} style={styles.item}>
+
+        <Image 
+          source={{uri: `${API_IMG + poster}`}}
+          style={styles.itemPhoto}
+          resizeMode="cover"
+        />
+
+    </TouchableOpacity>
+  )
+
+};
+
+export function ScreenA() {
+
+    const DATA = Popular()
+
+    const renderItem = ({ item }) => (
+
+      <Item 
+        poster={item.poster_path}
+      />
+
+  );
 
   return (
     <>
       <Header />
       
-      <ScrollView>
+      <ScrollView style={styles.container}>
 
-        <View>
+        <View style={styles.titleContainer}>
 
-          <Text>Press the button!</Text>
+          <Text style={styles.title}>Lançamentos</Text>
 
         </View>
 
-        <Button
-          title='Go to C screen'
-          onPress={openScreen} 
-        />
+        <SafeAreaView style={styles.imageBox}>
+
+          <FlatList 
+            data={DATA}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+            horizontal
+          />
+
+        </SafeAreaView>
 
       </ScrollView>
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+      flex: 1,
+      backgroundColor: '#1f1f1f'
+  },
+  titleContainer: {
+      margin: 10,
+      marginTop: 40,
+      marginBottom: 10,
+  },
+  title: {
+      color: 'white',
+      fontSize: 24,
+      fontWeight: 'bold'
+  },
+  item: {
+      margin: 10,
+  },
+  itemPhoto: {
+      width: 200,
+      height: 300
+  },
+  imageBox: {
+      marginTop: 10,
+      marginBottom: 5
+  }
+});
