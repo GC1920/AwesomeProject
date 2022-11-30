@@ -1,24 +1,38 @@
 import React from 'react';
-import { View, Button } from 'react-native';
+import { View, Text, Button, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+import { Header } from './utils/home.header';
 
 export function ScreenA() {
 
     const navigation = useNavigation()
 
     function openScreen() {
-        navigation.navigate('ScreenC')
+
+        navigation.navigate('ScreenC');
+
     }
 
 
   return (
-    <View style={{flex: 1, backgroundColor: 'red', justifyContent: 'center'}}>
+    <>
+      <Header />
+      
+      <ScrollView>
 
-        <Button 
-            title='Go to C screen'
-            onPress={openScreen}
+        <View>
+
+          <Text>Press the button!</Text>
+
+        </View>
+
+        <Button
+          title='Go to C screen'
+          onPress={openScreen} 
         />
 
-    </View>
+      </ScrollView>
+    </>
   );
 }

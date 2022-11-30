@@ -34,8 +34,7 @@ export function HomeStackRoute() {
                 name='ScreenC'
                 component={ScreenC}
                 options={{
-                    title: 'Cardume',
-                    headerTitleAlign: 'center',
+                    headerShown: false,
                     transitionSpec: {
                         open: config,
                         close: config,
