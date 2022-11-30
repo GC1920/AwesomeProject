@@ -3,7 +3,7 @@ export declare global {
         interface RootParamList{
             ScreenA: undefined
             ScreenB: undefined
-            ScreenC: undefined
+            ScreenC: { ID: number }
         }
     }
 }

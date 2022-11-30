@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, FlatList, ScrollView, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -7,18 +7,9 @@ import { Popular } from '../database/api.popular';
 
 import { API_IMG } from '@env';
 
-const Item = ({ poster }) => {
+const Item = ({ poster, onPress }) => (
 
-  const navigation = useNavigation()
-
-    function openScreen() {
-
-        navigation.navigate('ScreenC');
-
-    };
-
-  return(
-    <TouchableOpacity onPress={openScreen} style={styles.item}>
+  <TouchableOpacity onPress={onPress} style={styles.item}>
 
         <Image 
           source={{uri: `${API_IMG + poster}`}}
@@ -27,18 +18,25 @@ const Item = ({ poster }) => {
         />
 
     </TouchableOpacity>
-  )
-
-};
+  
+)
 
 export function ScreenA() {
 
     const DATA = Popular()
 
+    const [selectedId, setSelectedId] = useState(null);
+
+    const navigation = useNavigation()
+
     const renderItem = ({ item }) => (
 
       <Item 
         poster={item.poster_path}
+        onPress={() => {
+          setSelectedId(item.id); 
+          navigation.navigate('ScreenC', { ID: item.id });
+        }}
       />
 
   );
@@ -60,7 +58,8 @@ export function ScreenA() {
           <FlatList 
             data={DATA}
             renderItem={renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={(item) => item.id}
+            extraData={selectedId}
             horizontal
           />
 
