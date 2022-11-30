@@ -3,7 +3,7 @@ import { View, Text, Image, FlatList, ScrollView, TouchableOpacity, SafeAreaView
 import { useNavigation } from '@react-navigation/native';
 
 import { Header } from './utils/home.header';
-import { Popular } from '../database/api.popular';
+import { Upcoming } from '../database/api.upcoming';
 
 import { API_IMG } from '@env';
 
@@ -23,7 +23,7 @@ const Item = ({ poster, onPress }) => (
 
 export function ScreenA() {
 
-    const DATA = Popular()
+    const DATA = Upcoming()
 
     const [selectedId, setSelectedId] = useState(null);
 
