@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image, ImageBackground, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
 
 import { useRoute } from '@react-navigation/native';
 import { Details } from '../database/api.iden';
+
+import { API_IMG } from '@env';
 
 export function ScreenC() {
 
@@ -10,17 +12,60 @@ export function ScreenC() {
 
   const DATA = Details({ID: route.params.ID});
 
+  const Img = {uri: `${API_IMG + DATA.poster_path}`}
+
   console.log(DATA)
 
   return (
-    <View style={{flex: 1, backgroundColor: 'green', justifyContent: 'center'}}>
 
-      <Text style={{textAlign: 'center', color: '#fff'}}>
+      <View style={styles.container}>
 
-        Sucess!
+        <ImageBackground source={Img} blurRadius={6} resizeMode="cover" style={styles.backImg}>
 
-      </Text>
+          <Image source={Img} style={styles.img}  />
 
-    </View>
+          <Text style={styles.title}>
+
+            {DATA.title}
+
+          </Text>
+
+          <Text style={styles.overview}>
+
+            {DATA.overview}
+
+          </Text>
+
+        </ImageBackground>
+
+      </View>
   );
 }
+
+const styles = StyleSheet.create({
+  backImg: {
+    flex: 1,
+    justifyContent: "center"
+  },
+
+  container: {
+    flex: 1, 
+    backgroundColor: '#1f1f1f', 
+    justifyContent: 'center'
+  },
+  img: {
+    width: 400, 
+    height: 400, 
+    resizeMode: 'contain'
+  },
+  title: {
+    textAlign: 'center', 
+    color: '#fff', 
+    fontSize: 28, 
+    fontWeight: 'bold'
+  },
+  overview: {
+    color: '#fff', 
+    fontSize: 20
+  }
+})
