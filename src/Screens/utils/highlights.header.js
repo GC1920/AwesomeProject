@@ -16,14 +16,14 @@ export function Arrow() {
 
     return(
         <TouchableOpacity onPress={openScreen} style={styles.icon}>
-            <AntDesign name="arrowleft" size={24} color="black" />
+            <AntDesign name="arrowleft" size={28} color="#fff" />
         </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
     icon: {
-        marginTop: 40,
-        marginBottom: 20,
+        marginLeft: 8,
+        marginBottom: 8
     }
 });

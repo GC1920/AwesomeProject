@@ -3,6 +3,7 @@ import { View, Text, Image, ImageBackground, ScrollView, SafeAreaView, StyleShee
 
 import { useRoute } from '@react-navigation/native';
 import { Details } from '../database/api.iden';
+import { Arrow } from './utils/highlights.header'
 
 import { API_IMG } from '@env';
 
@@ -18,27 +19,31 @@ export function ScreenC() {
 
   return (
 
+    <>
       <View style={styles.container}>
 
-        <ImageBackground source={Img} blurRadius={6} resizeMode="cover" style={styles.backImg}>
+      <ImageBackground source={Img} blurRadius={6} resizeMode="cover" style={styles.backImg}>
 
-          <Image source={Img} style={styles.img}  />
+        <Arrow />
 
-          <Text style={styles.title}>
+        <Image source={Img} style={styles.img}  />
 
-            {DATA.title}
+        <Text style={styles.title}>
 
-          </Text>
+          {DATA.title}
 
-          <Text style={styles.overview}>
+        </Text>
 
-            {DATA.overview}
+        <Text style={styles.overview}>
 
-          </Text>
+          {DATA.overview}
 
-        </ImageBackground>
+        </Text>
+
+      </ImageBackground>
 
       </View>
+    </>
   );
 }
 
@@ -62,10 +67,12 @@ const styles = StyleSheet.create({
     textAlign: 'center', 
     color: '#fff', 
     fontSize: 28, 
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    margin: 12
   },
   overview: {
     color: '#fff', 
-    fontSize: 20
+    fontSize: 20,
+    margin: 12
   }
 })
