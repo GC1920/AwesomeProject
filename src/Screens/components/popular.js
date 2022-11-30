@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Image, FlatList, ScrollView, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { Header } from './utils/home.header';
-import { Upcoming } from '../database/api.upcoming';
-
-import { TopMovie } from './components/top-rated';
-import { PopularMovie } from './components/popular';
+import { Popular } from '../../database/api.popular';
 
 import { API_IMG } from '@env';
 
@@ -24,9 +20,9 @@ const Item = ({ poster, onPress }) => (
   
 )
 
-export function ScreenA() {
+export function PopularMovie() {
 
-    const DATA = Upcoming()
+    const DATA = Popular()
 
     const [selectedId, setSelectedId] = useState(null);
 
@@ -46,13 +42,12 @@ export function ScreenA() {
 
   return (
     <>
-      <Header />
       
       <ScrollView style={styles.container}>
 
         <View style={styles.titleContainer}>
 
-          <Text style={styles.title}>Lançamentos</Text>
+          <Text style={styles.title}>Popular</Text>
 
         </View>
 
@@ -67,10 +62,6 @@ export function ScreenA() {
           />
 
         </SafeAreaView>
-
-        <PopularMovie />
-
-        <TopMovie />
 
       </ScrollView>
     </>
