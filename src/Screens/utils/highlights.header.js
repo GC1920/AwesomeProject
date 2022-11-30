@@ -24,6 +24,7 @@ export function Arrow() {
 const styles = StyleSheet.create({
     icon: {
         marginLeft: 8,
+        marginTop: 28,
         marginBottom: 8
     }
 });
