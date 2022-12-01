@@ -8,6 +8,8 @@ import { Upcoming } from '../database/api.upcoming';
 import { TopMovie } from './components/top-rated';
 import { PopularMovie } from './components/popular';
 
+import { GenerateToken } from '../database/api.request'
+
 import { API_IMG } from '@env';
 
 const Item = ({ poster, onPress }) => (
@@ -25,6 +27,8 @@ const Item = ({ poster, onPress }) => (
 )
 
 export function ScreenA() {
+  
+    GenerateToken()
 
     const DATA = Upcoming()
 

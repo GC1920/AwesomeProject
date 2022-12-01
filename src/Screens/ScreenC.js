@@ -1,17 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, Button, ImageBackground, ScrollView, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { Entypo } from '@expo/vector-icons';
 
 import { useRoute } from '@react-navigation/native';
 import { Details } from '../database/api.iden';
+import { PostGeneratedToken } from '../database/api.request';
 import { Arrow } from './utils/highlights.header'
 
-import { API_IMG } from '@env';
+import { API_URL, API_REQ, API_KEY, API_IMG } from '@env';
+
+function MarkAsFavorite() {
+
+  const SESSION = PostGeneratedToken()
+
+  const [DATA, setData] = useState(null)
+
+  useEffect(() => {
+    fetch(`${API_REQ}account/${SESSION}/favorite/movies?api_key=${API_KEY}`)
+    .then((response) => response.json())
+    .then((json) => setData(json))
+    .catch((error) => console.error(error));
+  })
+
+  return DATA;
+}
 
 export function ScreenC() {
 
   const route = useRoute();
+
+  const navigation = useNavigation()
 
   const DATA = Details({ID: route.params.ID});
 
@@ -52,9 +72,13 @@ export function ScreenC() {
               <Text>Assista</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.rightButtom}>
+            <TouchableOpacity onPress={() => { 
+                MarkAsFavorite
+              }} style={styles.rightButtom}>
+
               <Entypo name="star" size={14} color="white" />
               <Text style={styles.label}>Minha Lista</Text>
+
             </TouchableOpacity>
 
           </SafeAreaView>
